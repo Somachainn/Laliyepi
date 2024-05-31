@@ -1,0 +1,44 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const ProductList = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/products`)
+      .then(response => {
+        setProducts(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the products!', error);
+      });
+  }, []);
+
+  const handlePurchase = (productId) => {
+    axios.post(`${process.env.REACT_APP_API_URL}/purchase`, { productId, userId: 'sample-user-id' })
+      .then(response => {
+        alert('Purchase successful!');
+      })
+      .catch(error => {
+        console.error('There was an error processing the purchase!', error);
+      });
+  };
+
+  return (
+    <div>
+      <h1>Laliyepi Shop</h1>
+      <div className="product-list">
+        {products.map(product => (
+          <div key={product._id} className="product">
+            <h2>{product.name}</h2>
+            <p>{product.description}</p>
+            <p>Price: ${product.price} ({product.piPrice} Pi)</p>
+            <button onClick={() => handlePurchase(product._id)}>Buy with Pi</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ProductList;
