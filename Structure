@@ -1,0 +1,15 @@
+laliyepi/
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── server.js
+│   ├── pi-integration.js
+│   └── .env
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   ├── package.json
+│   ├── .env
+│   └── README.md
+└── README.md
